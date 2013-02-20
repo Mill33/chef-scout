@@ -12,6 +12,8 @@ class ScoutCommand
     
     if rbenv?
       "/bin/bash -lc \"" + str + "\""
+    elsif !rvm?
+      "/usr/local/bin/" + str
     else
       str
     end
