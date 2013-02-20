@@ -11,7 +11,7 @@ class ScoutCommand
     str = [executable, key, arguments, output_redirection].compact.join(" ")
     
     if rbenv?
-      "/bin/bash -lc '" + str + "'"
+      "/bin/bash -lc \"" + str + "\""
     else
       str
     end
