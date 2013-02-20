@@ -8,7 +8,13 @@ class ScoutCommand
   end
 
   def to_s
-    [executable, key, arguments, output_redirection].compact.join(" ")
+    str = [executable, key, arguments, output_redirection].compact.join(" ")
+    
+    if rbenv?
+      "/bin/bash -lc '" + str + "'"
+    else
+      str
+    end
   end
 
   def executable
@@ -18,6 +24,10 @@ class ScoutCommand
 
   def rvm?
     options['rvm_ruby_string']
+  end
+  
+  def rbenv?
+    options['use_rbenv']
   end
 
   def key
