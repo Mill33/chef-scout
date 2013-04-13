@@ -11,9 +11,9 @@ class ScoutCommand
     str = [executable, key, arguments, output_redirection].compact.join(" ")
     
     if rbenv?
-      "/bin/bash -lc \"" + str + "\""
+      "/bin/bash -lc \"" + str + debug_str + "\""
     elsif !rvm?
-      "/usr/local/bin/" + str
+      "/usr/local/bin/" + str + debug_str
     else
       str
     end
@@ -22,6 +22,14 @@ class ScoutCommand
   def executable
     rvm_command = options['rvm_wrapper_prefix'] ? "#{options['rvm_wrapper_prefix']}_scout" : "scout"
     rvm? ? "/usr/local/rvm/bin/#{rvm_command}" : "scout"
+  end
+
+  def debug_str
+    if !options['debug_file'].blank?
+      "-v -l debug >> #{options['debug_file']}"
+    else
+      ""
+    end
   end
 
   def rvm?
