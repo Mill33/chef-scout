@@ -26,7 +26,7 @@ class ScoutCommand
 
   def debug_str
     if !options['debug_file'].nil?
-      "-v -l debug >> #{options['debug_file']}"
+      " -v -l debug >> #{options['debug_file']}"
     else
       ""
     end
