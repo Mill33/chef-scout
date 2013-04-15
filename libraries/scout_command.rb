@@ -10,7 +10,9 @@ class ScoutCommand
   def to_s
     str = [executable, key, arguments, output_redirection].compact.join(" ")
     
-    if !rvm?
+    if rbenv?
+      "/bin/bash -lc \"" + str + debug_str + "\""
+    elsif !rvm?
       "/usr/local/bin/" + str + debug_str
     else
       str
